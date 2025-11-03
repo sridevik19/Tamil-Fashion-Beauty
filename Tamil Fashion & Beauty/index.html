@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tamil Fashion & Beauty</title>
+<style>
+/* ======================= */
+/* Global & Reset Styles */
+/* ======================= */
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
+body { background-color:#fff6f6; color:#333; scroll-behavior:smooth; }
+a { text-decoration:none; color:inherit; }
+button { cursor:pointer; transition:0.3s; }
+img { display:block; max-width:100%; border-radius:8px; }
+
+/* ======================= */
+/* Header & Nav */
+/* ======================= */
+header {
+  position:sticky; top:0; z-index:100;
+  background:linear-gradient(90deg,#e57aa3,#7a2b3f);
+  padding:15px 30px; display:flex; justify-content:space-between; align-items:center; color:#fff;
+}
+header h1 { font-size:1.8rem; font-weight:700; }
+header nav ul { display:flex; list-style:none; gap:20px; }
+header nav ul li a { font-weight:500; color:#fff; }
+header nav ul li a:hover { color:#ffe9f2; }
+
+/* ======================= */
+/* Hero Section */
+/* ======================= */
+.hero {
+  height:85vh; display:flex; flex-direction:column; justify-content:center; align-items:center;
+  text-align:center; color:#fff;
+  background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
+              url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCbFFcaU0DhD-pZwTb6eGsiKsKTxLzNu9JSA&s') center/cover no-repeat;
+  padding:0 20px;
+}
+.hero h2 { font-size:2.8rem; margin-bottom:15px; }
+.hero p { font-size:1.2rem; margin-bottom:20px; }
+.hero button { background:#e57aa3; color:#fff; border:none; padding:12px 25px; border-radius:6px; font-size:1rem; }
+.hero button:hover { background:#7a2b3f; }
+
+/* ======================= */
+/* Section Titles */
+/* ======================= */
+section { padding:60px 30px; text-align:center; }
+section h2 { font-size:2rem; color:#e57aa3; margin-bottom:40px; }
+
+/* ======================= */
+/* Services Grid */
+/* ======================= */
+.service-grid { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; }
+.service-card { background:#fff; padding:15px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); width:260px; display:flex; flex-direction:column; transition:0.3s; }
+.service-card:hover { transform:translateY(-6px); }
+.service-card img { height:150px; object-fit:cover; border-radius:8px; margin-bottom:10px; }
+.service-card h3 { font-size:1.2rem; margin-bottom:5px; }
+.service-card p { font-size:0.9rem; color:#555; margin-bottom:8px; }
+.service-card small { display:block; font-size:0.8rem; color:#999; margin-bottom:8px; }
+.service-card button { background:#e57aa3; color:#fff; border:none; padding:8px; border-radius:6px; }
+.service-card button:hover { background:#7a2b3f; }
+
+/* ======================= */
+/* Modals */
+/* ======================= */
+.modal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6);
+         display:none; justify-content:center; align-items:center; z-index:200; }
+.modal-content { background:#fff; padding:20px; border-radius:10px; width:90%; max-width:600px; max-height:90%; overflow-y:auto; position:relative; }
+.modal-content h3 { margin-bottom:10px; }
+.modal-content p { margin-bottom:10px; color:#555; }
+.modal-content .images { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:10px; }
+.modal-content .images img { width:48%; height:100px; object-fit:cover; }
+.modal-content button.close { position:absolute; top:10px; right:10px; background:#7a2b3f; color:#fff; border:none; padding:5px 10px; border-radius:4px; }
+.modal-content button.close:hover { background:#e57aa3; }
+
+/* ======================= */
+/* Booking Form */
+/* ======================= */
+.booking-form { max-width:500px; margin:0 auto; background:#fff; padding:20px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1); display:flex; flex-direction:column; gap:12px; }
+.booking-form input, .booking-form select, .booking-form textarea { padding:10px; border:1px solid #ccc; border-radius:6px; font-size:1rem; width:100%; }
+.booking-form button.submit-btn { background:#e57aa3; color:#fff; border:none; padding:10px; border-radius:6px; font-size:1rem; }
+.booking-form button.submit-btn:hover { background:#7a2b3f; }
+
+/* Booking List */
+.booking-list { max-width:700px; margin:20px auto 0; text-align:left; }
+.booking-item { background:#fff4f8; border-left:5px solid #e57aa3; padding:12px 15px; margin-bottom:12px; border-radius:6px; }
+.booking-item strong { color:#7a2b3f; }
+.booking-item button { margin-top:5px; background:#7a2b3f; color:#fff; border:none; padding:5px 8px; border-radius:4px; cursor:pointer; font-size:0.85rem; }
+.booking-item button:hover { background:#e57aa3; }
+
+/* ======================= */
+/* Gallery Grid */
+/* ======================= */
+.gallery-grid { display:flex; flex-wrap:wrap; gap:15px; justify-content:center; }
+.gallery-grid img { width:250px; height:150px; object-fit:cover; border-radius:8px; cursor:pointer; transition:0.3s; }
+.gallery-grid img:hover { transform:scale(1.05); }
+
+/* ======================= */
+/* Testimonials Carousel */
+/* ======================= */
+.testimonial-card { background:#fff; padding:15px; border-radius:10px; box-shadow:0 3px 8px rgba(0,0,0,0.1); max-width:300px; margin:0 auto; }
+.testimonial-card p { font-style:italic; color:#555; margin-bottom:8px; }
+.testimonial-card strong { color:#7a2b3f; }
+
+/* ======================= */
+/* Contact & Social */
+/* ======================= */
+.contact-info { max-width:600px; margin:0 auto; text-align:left; display:flex; flex-direction:column; gap:10px; }
+.contact-info a { color:#e57aa3; }
+.social-icons { display:flex; gap:15px; margin-top:10px; }
+.social-icons a { display:inline-block; width:30px; height:30px; background:#7a2b3f; color:#fff; text-align:center; line-height:30px; border-radius:50%; }
+.social-icons a:hover { background:#e57aa3; }
+
+/* ======================= */
+/* Footer */
+/* ======================= */
+footer { background:#7a2b3f; color:#fff; text-align:center; padding:15px; font-size:0.9rem; }
+
+/* ======================= */
+/* Responsive */
+@media (max-width:768px) { .service-grid { flex-direction:column; align-items:center; } .gallery-grid img { width:90%; height:auto; } }
+@media (max-width:480px) { header nav ul { flex-direction:column; gap:10px; margin-top:10px; } .hero h2 { font-size:2rem; } }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div>
+    <h1>Tamil Fashion & Beauty</h1>
+    <small>Elegance meets tradition</small>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#booking">Book</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <h2>Welcome to Tamil Fashion & Beauty</h2>
+  <p>Your one-stop solution for beauty, fashion, and elegance</p>
+  <button onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Book Now</button>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <h2>Our Services</h2>
+
+  <div style="margin-bottom:20px;">
+    <input type="text" id="serviceSearch" placeholder="Search Services..." style="padding:8px 10px; width:200px;">
+    <select id="serviceFilter">
+      <option value="all">All Categories</option>
+    </select>
+    <select id="serviceSort">
+      <option value="default">Sort</option>
+      <option value="priceLow">Price: Low to High</option>
+      <option value="duration">Duration</option>
+    </select>
+  </div>
+
+  <div class="service-grid" id="serviceGrid">
+    <!-- Services will be rendered here -->
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking">
+  <h2>Book a Service</h2>
+  <form class="booking-form" id="bookingForm">
+    <input type="text" id="name" placeholder="Full Name" required>
+    <input type="tel" id="phone" placeholder="Phone Number" required>
+    <input type="email" id="email" placeholder="Email (Optional)">
+    <select id="serviceSelect" required>
+      <option value="">Select Service</option>
+    </select>
+    <input type="date" id="date" required>
+    <input type="time" id="time" required>
+    <button type="submit" class="submit-btn">Confirm Booking</button>
+  </form>
+
+  <div class="booking-list" id="bookingList">
+    <!-- Bookings will appear here -->
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2025 Tamil Fashion & Beauty. All rights reserved.
+</footer>
+
+<script>
+// =======================
+// SERVICES DATA
+// =======================
+const services = [
+  {id:1, name:"Bridal Makeup", category:"Beauty", priceINR:15000, durationMinutes:180, description:"Premium bridal makeup services.", images:["https://i.pinimg.com/736x/2a/38/dd/2a38dd7dd5827a2e8b7951c69d9ed87c.jpg"]},
+  {id:2, name:"Saree Draping", category:"Fashion", priceINR:500, durationMinutes:60, description:"Traditional saree draping.", images:["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVhGNg2f9oHxZG93z-5jVPOeohLxO6PZOrDQ&s"]},
+  {id:3, name:"Hair Styling", category:"Beauty", priceINR:3000, durationMinutes:90, description:"Elegant hairstyles for occasions.", images:["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB72JlR8gLlvjCbSPRh7T3m-xfQSB85hZGvw&s"]},
+  {id:4, name:"Fashion Design", category:"Tailoring", priceINR:10000, durationMinutes:240, description:"Professional Fashion designing services.", images:["https://images.shiksha.com/mediadata/images/articles/1736831916phpVpG5wO.jpeg"]},
+  {id:5, name:"Nail Art", category:"Beauty", priceINR:1500, durationMinutes:45, description:"Creative nail art designs.", images:["https://styl-inc.com/wp-content/uploads/2022/03/Untitled-design-17.png"]}
+];
+
+// =======================
+// DOM ELEMENTS
+// =======================
+const serviceGrid = document.getElementById('serviceGrid');
+const serviceSelect = document.getElementById('serviceSelect');
+const bookingForm = document.getElementById('bookingForm');
+const bookingList = document.getElementById('bookingList');
+const serviceSearch = document.getElementById('serviceSearch');
+const serviceFilter = document.getElementById('serviceFilter');
+const serviceSort = document.getElementById('serviceSort');
+
+// =======================
+// BOOKINGS
+// =======================
+let bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+
+// =======================
+// RENDER SERVICES
+// =======================
+function renderServices(list) {
+    serviceGrid.innerHTML = '';
+    serviceSelect.innerHTML = '<option value="">Select Service</option>';
+
+    // Populate category filter dynamically
+    const categories = ["all", ...new Set(services.map(s => s.category))];
+    serviceFilter.innerHTML = '';
+    categories.forEach(cat => {
+        const option = document.createElement('option');
+        option.value = cat;
+        option.textContent = cat;
+        serviceFilter.appendChild(option);
+    });
+
+    list.forEach(s => {
+        const card = document.createElement('div');
+        card.className = 'service-card';
+        card.innerHTML = `
+            <img src="${s.images[0]}" alt="${s.name}">
+            <h3>${s.name}</h3>
+            <p>${s.description}</p>
+            <small>Price: ₹${s.priceINR} | Duration: ${s.durationMinutes} mins</small>
+            <button onclick="selectService(${s.id})">Book This Service</button>
+        `;
+        serviceGrid.appendChild(card);
+
+        // Populate booking select
+        const opt = document.createElement('option');
+        opt.value = s.id;
+        opt.textContent = s.name;
+        serviceSelect.appendChild(opt);
+    });
+}
+
+// =======================
+// SELECT SERVICE BUTTON
+// =======================
+function selectService(id){
+    serviceSelect.value = id;
+    document.getElementById('booking').scrollIntoView({behavior:'smooth'});
+}
+
+// =======================
+// FILTER / SEARCH / SORT
+// =======================
+function applyServiceFilters() {
+    const searchText = serviceSearch.value.toLowerCase();
+    const category = serviceFilter.value;
+    const sortBy = serviceSort.value;
+
+    let filtered = services.filter(s => {
+        let matches = s.name.toLowerCase().includes(searchText);
+        if(category !== 'all') matches = matches && s.category === category;
+        return matches;
+    });
+
+    if(sortBy === 'priceLow') filtered.sort((a,b) => a.priceINR - b.priceINR);
+    if(sortBy === 'duration') filtered.sort((a,b) => a.durationMinutes - b.durationMinutes);
+
+    renderServices(filtered);
+}
+
+serviceSearch.addEventListener('input', applyServiceFilters);
+serviceFilter.addEventListener('change', applyServiceFilters);
+serviceSort.addEventListener('change', applyServiceFilters);
+
+// =======================
+// RENDER BOOKINGS
+// =======================
+function renderBookings() {
+    bookingList.innerHTML = '';
+    bookings.forEach(b => {
+        const serviceName = services.find(s => s.id == b.service)?.name || 'Unknown Service';
+        const div = document.createElement('div');
+        div.className = 'booking-item';
+        div.innerHTML = `
+            <strong>${b.name}</strong> booked <strong>${serviceName}</strong><br>
+            Date: ${b.date} | Time: ${b.time}<br>
+            Booking ID: ${b.id}
+            ${b.email ? `<br>Email: ${b.email}` : ''}
+            <br>Phone: ${b.phone}
+            <button onclick="removeBooking('${b.id}')">Cancel</button>
+        `;
+        bookingList.appendChild(div);
+    });
+}
+
+// =======================
+// REMOVE BOOKING
+// =======================
+function removeBooking(id){
+    if(confirm('Are you sure you want to cancel this booking?')){
+        bookings = bookings.filter(b => b.id !== id);
+        localStorage.setItem('bookings', JSON.stringify(bookings));
+        renderBookings();
+    }
+}
+
+// =======================
+// BOOKING FORM SUBMIT
+// =======================
+bookingForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const service = document.getElementById('serviceSelect').value;
+    const date = document.getElementById('date').value;
+    const time = document.getElementById('time').value;
+
+    if(!name || !phone || !service || !date || !time){
+        alert('Please fill all required fields.');
+        return;
+    }
+
+    const bookingID = `TFB-${new Date().toISOString().replace(/[-:.TZ]/g,'')}-${Math.floor(Math.random()*1000).toString().padStart(4,'0')}`;
+    bookings.push({id: bookingID, name, phone, email, service, date, time});
+    localStorage.setItem('bookings', JSON.stringify(bookings));
+    renderBookings();
+
+    alert(`Booking Confirmed!\nYour Booking ID: ${bookingID}`);
+    bookingForm.reset();
+});
+
+// =======================
+// INITIAL RENDER
+// =======================
+renderServices(services);
+renderBookings();
+</script>
+
+</body>
+</html>
